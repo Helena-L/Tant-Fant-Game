@@ -18,100 +18,198 @@
 #  -  -  -
 
 class board:
-	loc = {}
-	def __init__(self) :
-		self.loc = ['B', 'B', 'B', '', '', '', 'W', 'W', 'W']
-		
-	def cur_state(self) :
-		return self.loc
+    loc = {}
 
-	def find_empty_spot(self) :
-		return [i + 1 for i, j in enumerate(self.cur_state()) if j == '']
+    def __init__(self):
+        self.loc = ['B', 'B', 'B', '', '', '', 'W', 'W', 'W']
 
-	def set_piece(self, pos, piece) :
-		self.loc[pos-1] = piece
+    def cur_state(self):
+        return self.loc
 
-	def set_state(self, state) :
-		for i in range(len(state)) :
-			self.loc[i] = state[i]
+    def find_empty_spot(self):
+        return [i + 1 for i, j in enumerate(self.cur_state()) if j == '']
 
-	# update the board
-	def do_move(self, pos, move, cur_board) :
-		empty_spot = cur_board.find_empty_spot()
-		cur_piece = cur_board.loc[pos-1]
-		update_board = board()
-		update_board.set_state(cur_board.cur_state())
-		
-		if move == 'right' :
-			next_pos = pos + 1
-			if next_pos in empty_spot :
-				update_board.set_piece(pos, '')
-				update_board.set_piece(next_pos, cur_piece)
-				return update_board
-		elif move == 'left' :
-			next_pos = pos - 1
-			if next_pos in empty_spot :
-				update_board.set_piece(pos, '')
-				update_board.set_piece(next_pos, cur_piece)
-				return update_board
-		elif move == 'up' :
-			next_pos = pos - 3
-			if next_pos in empty_spot :
-				update_board.set_piece(pos, '')
-				update_board.set_piece(next_pos, cur_piece)
-				return update_board
-		elif move == 'down' :
-			next_pos = pos + 3
-			if next_pos in empty_spot :
-				update_board.set_piece(pos, '')
-				update_board.set_piece(next_pos, cur_piece)
-				return update_board
-		elif move == 'upleft' :
-			next_pos = pos - 4
-			if next_pos in empty_spot :
-				update_board.set_piece(pos, '')
-				update_board.set_piece(next_pos, cur_piece)
-				return update_board
-		elif move == 'upright' :
-			next_pos = pos - 2
-			if next_pos in empty_spot :
-				update_board.set_piece(pos, '')
-				update_board.set_piece(next_pos, cur_piece)
-				return update_board
-		elif move == 'downleft' :
-			next_pos = pos + 2
-			if next_pos in empty_spot :
-				update_board.set_piece(pos, '')
-				update_board.set_piece(next_pos, cur_piece)
-				return update_board
-		elif move == 'downright' :
-			next_pos = pos + 4
-			if next_pos in empty_spot :
-				update_board.set_piece(pos, '')
-				update_board.set_piece(next_pos, cur_piece)
-				return update_board
-		else :
-			return None
+    def set_piece(self, pos, piece):
+        self.loc[pos-1] = piece
+
+    def set_state(self, state):
+        for i in range(len(state)):
+            self.loc[i] = state[i]
+
+    # update the board
+    def do_move(self, pos, move, cur_board):
+        empty_spot = cur_board.find_empty_spot()
+        cur_piece = cur_board.loc[pos-1]
+        update_board = board()
+        update_board.set_state(cur_board.cur_state())
+
+        if move == 'right':
+            next_pos = pos + 1
+            if next_pos in empty_spot:
+                update_board.set_piece(pos, '')
+                update_board.set_piece(next_pos, cur_piece)
+                return update_board
+        elif move == 'left':
+            next_pos = pos - 1
+            if next_pos in empty_spot:
+                update_board.set_piece(pos, '')
+                update_board.set_piece(next_pos, cur_piece)
+                return update_board
+        elif move == 'up':
+            next_pos = pos - 3
+            if next_pos in empty_spot:
+                update_board.set_piece(pos, '')
+                update_board.set_piece(next_pos, cur_piece)
+                return update_board
+        elif move == 'down':
+            next_pos = pos + 3
+            if next_pos in empty_spot:
+                update_board.set_piece(pos, '')
+                update_board.set_piece(next_pos, cur_piece)
+                return update_board
+        elif move == 'upleft':
+            next_pos = pos - 4
+            if next_pos in empty_spot:
+                update_board.set_piece(pos, '')
+                update_board.set_piece(next_pos, cur_piece)
+                return update_board
+        elif move == 'upright':
+            next_pos = pos - 2
+            if next_pos in empty_spot:
+                update_board.set_piece(pos, '')
+                update_board.set_piece(next_pos, cur_piece)
+                return update_board
+        elif move == 'downleft':
+            next_pos = pos + 2
+            if next_pos in empty_spot:
+                update_board.set_piece(pos, '')
+                update_board.set_piece(next_pos, cur_piece)
+                return update_board
+        elif move == 'downright':
+            next_pos = pos + 4
+            if next_pos in empty_spot:
+                update_board.set_piece(pos, '')
+                update_board.set_piece(next_pos, cur_piece)
+                return update_board
+        else:
+            return None
 
     # black piece : 'X'
     # white piece : 'W'
-	def print_board(self) :
-		next_line = 1
-		cur_loc = self.cur_state()
-		# print cur_loc
-		for pos in cur_loc :
-			if pos == 'B' :
-				print 'X |',
-			elif pos == 'W' :
-				print 'O |',
-			else :
-				print '  |',
-			if next_line % 3 == 0 :
-				print ""
-				print "-----------"
-				next_line = 1
-			else :
-				next_line += 1
+    def print_board(self):
+        next_line = 1
+        cur_loc = self.cur_state()
+        # print cur_loc
+        for pos in cur_loc:
+            if pos == 'B':
+                print 'X |',
+            elif pos == 'W':
+                print 'O |',
+            else:
+                print '  |',
+            if next_line % 3 == 0:
+                print ""
+                print "-----------"
+                next_line = 1
+            else:
+                next_line += 1
+
+
+# class board:
+# 	loc = {}
+# 	def __init__(self) :
+# 		self.loc = ['B', 'B', 'B', '', '', '', 'W', 'W', 'W']
+		
+# 	def cur_state(self) :
+# 		return self.loc
+
+# 	def find_empty_spot(self) :
+# 		return [i + 1 for i, j in enumerate(self.cur_state()) if j == '']
+
+# 	def set_piece(self, pos, piece) :
+# 		self.loc[pos-1] = piece
+
+# 	def set_state(self, state) :
+# 		for i in range(len(state)) :
+# 			self.loc[i] = state[i]
+
+# 	# update the board
+# 	def do_move(self, pos, move, cur_board) :
+# 		empty_spot = cur_board.find_empty_spot()
+# 		cur_piece = cur_board.loc[pos-1]
+# 		update_board = board()
+# 		update_board.set_state(cur_board.cur_state())
+		
+# 		if move == 'right' :
+# 			next_pos = pos + 1
+# 			if next_pos in empty_spot :
+# 				update_board.set_piece(pos, '')
+# 				update_board.set_piece(next_pos, cur_piece)
+# 				return update_board
+# 		elif move == 'left' :
+# 			next_pos = pos - 1
+# 			if next_pos in empty_spot :
+# 				update_board.set_piece(pos, '')
+# 				update_board.set_piece(next_pos, cur_piece)
+# 				return update_board
+# 		elif move == 'up' :
+# 			next_pos = pos - 3
+# 			if next_pos in empty_spot :
+# 				update_board.set_piece(pos, '')
+# 				update_board.set_piece(next_pos, cur_piece)
+# 				return update_board
+# 		elif move == 'down' :
+# 			next_pos = pos + 3
+# 			if next_pos in empty_spot :
+# 				update_board.set_piece(pos, '')
+# 				update_board.set_piece(next_pos, cur_piece)
+# 				return update_board
+# 		elif move == 'upleft' :
+# 			next_pos = pos - 4
+# 			if next_pos in empty_spot :
+# 				update_board.set_piece(pos, '')
+# 				update_board.set_piece(next_pos, cur_piece)
+# 				return update_board
+# 		elif move == 'upright' :
+# 			next_pos = pos - 2
+# 			if next_pos in empty_spot :
+# 				update_board.set_piece(pos, '')
+# 				update_board.set_piece(next_pos, cur_piece)
+# 				return update_board
+# 		elif move == 'downleft' :
+# 			next_pos = pos + 2
+# 			if next_pos in empty_spot :
+# 				update_board.set_piece(pos, '')
+# 				update_board.set_piece(next_pos, cur_piece)
+# 				return update_board
+# 		elif move == 'downright' :
+# 			next_pos = pos + 4
+# 			if next_pos in empty_spot :
+# 				update_board.set_piece(pos, '')
+# 				update_board.set_piece(next_pos, cur_piece)
+# 				return update_board
+# 		else :
+# 			return None
+
+#     # black piece : 'X'
+#     # white piece : 'W'
+# 	def print_board(self) :
+# 		next_line = 1
+# 		cur_loc = self.cur_state()
+# 		# print cur_loc
+# 		for pos in cur_loc :
+# 			if pos == 'B' :
+# 				print 'X |',
+# 			elif pos == 'W' :
+# 				print 'O |',
+# 			else :
+# 				print '  |',
+# 			if next_line % 3 == 0 :
+# 				print ""
+# 				print "-----------"
+# 				next_line = 1
+# 			else :
+# 				next_line += 1
 
 class player:
 
